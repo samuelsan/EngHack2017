@@ -47,7 +47,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/route"
         android:layout_gravity="center"
-        android:text="Calculate Route" />
+        android:text="Boost Trip" />
 
     <Button
         android:layout_width="wrap_content"

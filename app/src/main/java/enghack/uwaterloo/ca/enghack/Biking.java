@@ -45,7 +45,6 @@ public class Biking extends FragmentActivity implements OnMapReadyCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_biking);
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -82,6 +81,7 @@ public class Biking extends FragmentActivity implements OnMapReadyCallback {
                 LatLng latlng = new LatLng(place.getLatLng().latitude, place.getLatLng().longitude);
                 startMarker = mMap.addMarker(new MarkerOptions().position(latlng)
                                                                 .title(place.getName().toString()));
+                startMarker.setSnippet("Origin");
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
             }
 
@@ -107,6 +107,7 @@ public class Biking extends FragmentActivity implements OnMapReadyCallback {
                 destMarker = mMap.addMarker(new MarkerOptions().position(latlng)
                         .title(place.getName().toString())
                         .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                destMarker.setSnippet("Destination");
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(latlng));
             }
 
@@ -141,7 +142,7 @@ public class Biking extends FragmentActivity implements OnMapReadyCallback {
         SharedPreferences settings = this.getSharedPreferences("PREFS", 0);
         editText.setText(settings.getString("value", ""));
 
-        return view; // return view here instead of notaki
+        return view;
     }
 
     /**
@@ -156,5 +157,19 @@ public class Biking extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+
+        /*
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                if (marker.getSnippet().equals("Tap here to remove")) {
+                    marker.remove();
+                }
+            }
+        });
+
+        */
     }
 }

@@ -72,7 +72,7 @@ public class CalculateRouteListener implements View.OnClickListener {
         pos = mainActivity.destMarker.getPosition();
         double destLat = pos.latitude, destLong = pos.longitude;
 
-        double leftTopLat = 0.0045, leftTopLong = 0, rightBottomLat = 0, rightBottomLong = 0.0045;
+        double leftTopLat = 0.0045, leftTopLong, rightBottomLat, rightBottomLong = 0.0045;
 
         if (startLat > destLat) {
             leftTopLat += startLat;
@@ -156,7 +156,7 @@ public class CalculateRouteListener implements View.OnClickListener {
                 url = url.substring(0, url.length() - 3); // getting rid of trailing %7C
             }
 
-            url += "&mode=bicycling&key=AIzaSyAqQW0qieyl5RdxqoAO1ACCR0tBmBVbXNs";
+            url += "&mode=bicycling&key=AIzaSyCJ1bY0wslGILXSABYjueDJf33Ne6JLiT8";
 
             final String sendURL = url;
 
@@ -195,7 +195,6 @@ public class CalculateRouteListener implements View.OnClickListener {
     public void drawPath(String result) {
 
         try {
-            //Tranform the string into a json object
             final JSONObject json = new JSONObject(result);
             JSONArray routeArray = json.getJSONArray("routes");
             JSONObject routes = routeArray.getJSONObject(0);
@@ -205,14 +204,14 @@ public class CalculateRouteListener implements View.OnClickListener {
             Polyline line = mainActivity.mMap.addPolyline(new PolylineOptions()
                     .addAll(list)
                     .width(20)
-                    .color(Color.parseColor("#39add1"))//Google maps blue color
+                    .color(Color.parseColor("#39add1"))
                     .geodesic(true)
             );
 
             Polyline line2 = mainActivity.mMap.addPolyline(new PolylineOptions()
                     .addAll(list)
                     .width(5)
-                    .color(Color.parseColor("#ffffff"))//Google maps blue color
+                    .color(Color.parseColor("#ffffff"))
                     .geodesic(true)
             );
             blue.add(line);
@@ -227,7 +226,7 @@ public class CalculateRouteListener implements View.OnClickListener {
 
         List<LatLng> allPoly = new ArrayList<LatLng>();
         int index = 0, len = encoded.length();
-        int lat = 0, lng = 0, count = 0, width = 40;
+        int lat = 0, lng = 0;
 
 
         while (index < len) {
